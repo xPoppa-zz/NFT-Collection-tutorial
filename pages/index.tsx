@@ -32,7 +32,13 @@ const Home: NextPage = () => {
 	// tokenIdsMinted keeps track of the number of tokenIds that have been minted
 	const [tokenIdsMinted, setTokenIdsMinted] = useState("0");
 	// Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
-	const web3ModalRef = useRef();
+	const web3ModalRef = useRef(
+		new Web3Modal({
+			network: "",
+			providerOptions: {},
+			disableInjectedProvider: false,
+		})
+	);
 
 	const presaleMint = async () => {
 		try {
