@@ -3,7 +3,15 @@
 // 	-	What is the flow of this application see? Write it in a flow Chart
 
 import type { NextPage } from "next";
-import { Button, Flex, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import {
+	Button,
+	Flex,
+	Heading,
+	Image,
+	Link,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
 import { Contract, providers, utils } from "ethers";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
@@ -182,7 +190,9 @@ const Home: NextPage = () => {
 			// call the owner function from the contract
 			const _owner = await nftContract.owner();
 			// We will get the signer now to extract the address of the currently connected MetaMask account
-			const signer = await getProviderOrSigner(true);
+			const signer = await (getProviderOrSigner(
+				true
+			) as Promise<providers.JsonRpcSigner>);
 			// Get the address associated to the signer which is connected to  MetaMask
 			const address = await signer.getAddress();
 			if (address.toLowerCase() === _owner.toLowerCase()) {
@@ -334,7 +344,7 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<Flex h="100vh" justify={"center"} align="center" bg="grey">
+		<VStack h="100vh" justify={"center"} align="center" bg="grey">
 			<VStack>
 				<Heading>Welcome to Crypto Devs!</Heading>
 				<Text>Its an NFT collection for developers in Crypto</Text>
@@ -342,7 +352,11 @@ const Home: NextPage = () => {
 				{renderButton()}
 				<Image src="./cryptodevs/0.svg" alt="no Image"></Image>
 			</VStack>
-		</Flex>
+			<Text fontSize={"10px"}>
+				Made by Poppa_Mano, Thanks to tutorial on{" "}
+				<Link href="https://learnweb3.io/">learnweb3.io</Link>
+			</Text>
+		</VStack>
 	);
 };
 
