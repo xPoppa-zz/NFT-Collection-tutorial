@@ -1,17 +1,11 @@
 // Questions:
 // 	-	How does ethers work how does it connects to the blockchain and querries it? Read docs.
 // 	-	What is the flow of this application see? Write it in a flow Chart
+// 	-	Nextjs window is not defined how can you fix this?
+// 	-	Volg Nextjs tutorial om beter te begrijpen whats up.
 
 import type { NextPage } from "next";
-import {
-	Button,
-	Flex,
-	Heading,
-	Image,
-	Link,
-	Text,
-	VStack,
-} from "@chakra-ui/react";
+import { Button, Heading, Image, Link, Text, VStack } from "@chakra-ui/react";
 import { Contract, providers, utils } from "ethers";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
@@ -32,13 +26,7 @@ const Home: NextPage = () => {
 	// tokenIdsMinted keeps track of the number of tokenIds that have been minted
 	const [tokenIdsMinted, setTokenIdsMinted] = useState("0");
 	// Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
-	const web3ModalRef = useRef(
-		new Web3Modal({
-			network: "",
-			providerOptions: {},
-			disableInjectedProvider: false,
-		})
-	);
+	const web3ModalRef = useRef(new Web3Modal({}));
 
 	const presaleMint = async () => {
 		try {
